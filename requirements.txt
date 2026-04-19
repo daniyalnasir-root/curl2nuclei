@@ -1,0 +1,2 @@
+# curl2nuclei uses only the Python standard library.
+# This file is kept for tooling that expects a requirements file.

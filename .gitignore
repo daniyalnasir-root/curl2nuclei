@@ -1,0 +1,27 @@
+__pycache__/
+*.py[codz]
+*$py.class
+*.so
+
+build/
+dist/
+*.egg-info/
+*.egg
+
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+
+.env
+.envrc
+.venv
+venv/
+env/
+
+.idea/
+.vscode/
+
+# Generated nuclei templates from local runs (committed examples/ only)
+/*.yaml
+!examples/*.yaml
