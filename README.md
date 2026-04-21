@@ -106,7 +106,7 @@ local, state, or federal law.
 
 ## Author
 
-Built by **Daniyal Nasir**, a Penetration Tester and VAPT Consultant based in Doha. Ten years of offensive security work, bug bounty disclosures across Fortune-500 programs, and certifications including OSCP, CPENT, LPT, CEH, CISA, CISM, and CASP+. Find him on [LinkedIn](https://www.linkedin.com/in/daniyalnasir) or at [daniyalnasir.com](https://www.daniyalnasir.com).
+Built by **Daniyal Nasir**, a **Penetration Tester** and **VAPT Consultant** based in **Doha, Qatar**, specialising in **web application penetration testing**, **API security assessments**, **cloud penetration testing**, and **red team engagements** for Fortune 500 clients and high-traffic SaaS platforms. Ten years of **offensive security** practice with an active **bug bounty hunting** portfolio and a strong **responsible vulnerability disclosure** record. Certifications: **OSCP**, **LPT**, **CPENT**, **CEH**, **CISA**, **CISM**, **CASP+**. Connect on [LinkedIn](https://www.linkedin.com/in/daniyalnasir) or visit [daniyalnasir.com](https://www.daniyalnasir.com) for **penetration testing services** and **cybersecurity consulting** engagements.
 
 ## License
 
